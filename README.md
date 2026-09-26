@@ -149,63 +149,6 @@ Supported historical periods include:
 
 The combination of interval + period determines the returned market-data dataset.
 
----
-
-# 4. Technical Architecture
-
-The application follows a layered architecture:
-
-```text
-                    ┌─────────────────────────────┐
-                    │        Streamlit UI         │
-                    │                             │
-                    │ Company / Ticker Search     │
-                    │ Interval / Period           │
-                    │ SMA Parameters              │
-                    └──────────────┬──────────────┘
-                                   │
-                                   ▼
-                    ┌─────────────────────────────┐
-                    │      Application Layer      │
-                    │          app.py             │
-                    │                             │
-                    │ Validation                  │
-                    │ Workflow orchestration      │
-                    │ KPI calculation             │
-                    │ Visualization               │
-                    └──────────────┬──────────────┘
-                                   │
-                                   ▼
-                    ┌─────────────────────────────┐
-                    │      Market Data Layer      │
-                    │ services/market_data.py     │
-                    │                             │
-                    │ Ticker Resolution            │
-                    │ Yahoo Finance Retrieval      │
-                    │ OHLCV Normalization          │
-                    │ Indicator Calculation        │
-                    │ TensorTrade Preparation      │
-                    └──────────────┬──────────────┘
-                                   │
-                                   ▼
-                    ┌─────────────────────────────┐
-                    │       Yahoo Finance         │
-                    │          / yfinance         │
-                    └──────────────┬──────────────┘
-                                   │
-                                   ▼
-                    ┌─────────────────────────────┐
-                    │       OHLCV Market Data     │
-                    └──────────────┬──────────────┘
-                                   │
-                  ┌────────────────┼────────────────┐
-                  ▼                ▼                ▼
-             Indicators        Chart/KPIs      TensorTrade
-             SMA 20/50          Analytics       Dataset
-```
-
----
-
 # 5. Application Components
 
 ## 5.1 `app.py`
@@ -677,44 +620,6 @@ def get_market_service():
 
 This avoids unnecessarily recreating the service object on every Streamlit rerun.
 
----
-
-# 20. User Journey
-
-Typical user workflow:
-
-```text
-1. Open application
-        ↓
-2. Enter company/ticker
-        ↓
-3. Select interval
-        ↓
-4. Select historical period
-        ↓
-5. Configure Fast/Slow SMA
-        ↓
-6. Application resolves ticker
-        ↓
-7. Yahoo Finance data retrieved
-        ↓
-8. OHLCV validated
-        ↓
-9. SMA indicators calculated
-        ↓
-10. KPIs displayed
-        ↓
-11. Candlestick + SMA + Volume chart
-        ↓
-12. Market data table
-        ↓
-13. Data-quality validation
-        ↓
-14. Download analytical / TensorTrade dataset
-```
-
----
-
 # 21. Business Use Cases
 
 ## 21.1 Market Research
@@ -831,27 +736,6 @@ groww_yfinance_tensortrade_streamlit/
     ├── __init__.py
     └── market_data.py
 ```
-
----
-
-# 24. Technology Stack
-
-| Layer | Technology |
-|---|---|
-| Frontend / Application | Streamlit |
-| Market Data | Yahoo Finance / yfinance |
-| Programming Language | Python |
-| Data Processing | Pandas |
-| Numerical Processing | NumPy |
-| Scientific Computing | SciPy |
-| Visualization | Plotly |
-| ML Foundation | Scikit-learn |
-| HTTP | Requests |
-| Date/Time | Python datetime / dateutil |
-| RL Readiness | TensorTrade-compatible OHLCV |
-| Data Format | CSV / Pandas DataFrame |
-
----
 
 # 25. Dependencies
 
@@ -1056,75 +940,6 @@ It does not currently provide:
 
 ---
 
-# 32. Business-to-Technical Mapping
-
-| Business Requirement | Technical Implementation |
-|---|---|
-| Search company | Company/ticker input + resolver |
-| Retrieve market data | yfinance / Yahoo Finance |
-| Standardize data | OHLCV normalization |
-| Analyze trends | SMA 20 / SMA 50 |
-| Visualize market | Plotly |
-| Review KPIs | Streamlit metrics |
-| Validate data | Data-quality diagnostics |
-| Export data | CSV download |
-| Prepare ML/RL data | TensorTrade-ready OHLCV |
-| Avoid trading risk | Research-only architecture |
-| Maintain clean UI | Backend-only exception logging |
-| Support future providers | Market-data service abstraction |
-
----
-
-# 33. End-to-End Data Flow
-
-```text
-                    USER
-                     │
-                     ▼
-          Company / Ticker Input
-                     │
-                     ▼
-              Ticker Resolver
-                     │
-                     ▼
-                Yahoo Ticker
-                     │
-                     ▼
-             Yahoo Finance API
-                     │
-                     ▼
-                 Raw OHLCV
-                     │
-                     ▼
-             OHLCV Normalizer
-                     │
-                     ▼
-              Data Validation
-                     │
-                     ▼
-            Technical Indicators
-              ┌──────┴──────┐
-              │             │
-            SMA 20         SMA 50
-              │             │
-              └──────┬──────┘
-                     ▼
-              Analytics Layer
-              ┌──────┼──────┐
-              │      │      │
-             KPI   Chart   Trend
-              │      │      │
-              └──────┼──────┘
-                     ▼
-              Market Data View
-                     │
-             ┌───────┴────────┐
-             ▼                ▼
-       Analytical CSV   TensorTrade CSV
-```
-
----
-
 # 34. Summary
 
 Enterprise Market Intelligence provides a clean separation between:
@@ -1142,7 +957,5 @@ Data Quality
         ↓
 ML / Reinforcement Learning Readiness
 ```
-
-The application is intentionally designed as a **research-first market intelligence platform**.
 
 Its current architecture provides a practical foundation for evolving from a Streamlit analytics application into a larger market-data, ML, reinforcement-learning, and observability platform without coupling the user interface directly to the underlying market-data implementation.
