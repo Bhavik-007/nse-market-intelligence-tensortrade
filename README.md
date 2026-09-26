@@ -620,13 +620,13 @@ def get_market_service():
 
 This avoids unnecessarily recreating the service object on every Streamlit rerun.
 
-# 21. Business Use Cases
+# 20. Business Use Cases
 
-## 21.1 Market Research
+## 20.1 Market Research
 
 Analysts can quickly inspect market instruments without manually collecting historical price data.
 
-## 21.2 Technical Analysis
+## 20.2 Technical Analysis
 
 Users can examine:
 
@@ -636,7 +636,7 @@ Users can examine:
 - Volume
 - Historical OHLCV
 
-## 21.3 Data Engineering
+## 20.3 Data Engineering
 
 The application provides a standardized market-data pipeline that can serve as a source for:
 
@@ -645,7 +645,7 @@ The application provides a standardized market-data pipeline that can serve as a
 - Analytics
 - Machine-learning experiments
 
-## 21.4 AI / ML Research
+## 20.4 AI / ML Research
 
 The normalized OHLCV dataset can become an input to future:
 
@@ -654,7 +654,7 @@ The normalized OHLCV dataset can become an input to future:
 - Reinforcement-learning environments
 - TensorTrade experiments
 
-## 21.5 Data Quality / Observability
+## 20.5 Data Quality / Observability
 
 The diagnostic layer provides a basic foundation for monitoring:
 
@@ -666,7 +666,7 @@ The diagnostic layer provides a basic foundation for monitoring:
 
 ---
 
-# 22. Technical Design Principles
+# 21. Technical Design Principles
 
 The application follows these principles:
 
@@ -712,7 +712,7 @@ There is no order-placement workflow.
 
 ---
 
-# 23. Project Structure
+# 22. Project Structure
 
 Recommended project structure:
 
@@ -757,7 +757,7 @@ TensorTrade is intentionally treated as a downstream research dependency rather 
 
 ---
 
-# 26. Installation
+# 23. Installation
 
 Create the environment:
 
@@ -785,7 +785,7 @@ streamlit run app.py
 
 ---
 
-# 27. Operational Architecture
+# 24. Operational Architecture
 
 For local development:
 
@@ -821,7 +821,7 @@ Analytics / ML / RL
 
 ---
 
-# 28. Future Enterprise Enhancements
+# 25. Future Enterprise Enhancements
 
 The current application provides a strong foundation for future extensions.
 
@@ -887,7 +887,7 @@ A future production version could monitor:
 
 ---
 
-# 29. Security Considerations
+# 26. Security Considerations
 
 The current application is designed as a market-data research application and does not execute trades.
 
@@ -907,7 +907,7 @@ No sensitive credentials should be hard-coded in Python source files.
 
 ---
 
-# 30. Important Data Considerations
+# 27. Important Data Considerations
 
 Yahoo Finance is used as the market-data provider.
 
@@ -923,7 +923,7 @@ For production financial systems, a licensed market-data provider and appropriat
 
 ---
 
-# 31. Current Limitations
+# 28. Current Limitations
 
 The current application is primarily an analytics and research platform.
 
@@ -940,7 +940,7 @@ It does not currently provide:
 
 ---
 
-# 34. Summary
+# 29. Summary
 
 Enterprise Market Intelligence provides a clean separation between:
 
